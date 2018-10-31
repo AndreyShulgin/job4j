@@ -1,13 +1,27 @@
 package ru.job4j.calculate;
-/**Первая программа 
-* выводит на экран Hello World!
-* @author Andrey Shulgin
-*/
-public class Calculate{
-	/** Точка входа в класс
-	* @param args Массив строковых аргументов
-	*/
-	public static void main (String[] args){
-		System.out.println("Helo World!");
-	}
+
+/**
+ * Calculate.
+ *
+ * @author Andrey Shulgin (neonod404@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public class Calculate {
+    /**
+     * Main.
+     * @param args - args.
+     */
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+
+    /**
+     * Method echo.
+     * @param name Your name.
+     * @return Echo plus your name.
+     */
+    public String echo(String name) {
+        return "Echo, echo, echo : " + name;
+    }
 }
