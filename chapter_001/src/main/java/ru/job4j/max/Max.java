@@ -14,4 +14,16 @@ public class Max {
     public int max(int first, int second) {
         return first > second ? first : second;
     }
+
+    /**
+     * Вычисляем максимум из трех чисел.
+     * @param first - первое число.
+     * @param second - второе число.
+     * @param third - третье число.
+     * @return - возвращает максимальное число.
+     */
+    public int maxOfThree(int first, int second, int third) {
+        int temp = this.max(first, second);
+        return this.max(temp, third);
+    }
 }
