@@ -11,10 +11,8 @@ public class Factorial {
      */
     public int calc(int n) {
         int sum = 1;
-        if (n != 0) {
-            for (int i = n; i > 0; i--) {
+        for (int i = n; i > 0; i--) {
                 sum = sum * i;
-            }
         }
         return sum;
     }
