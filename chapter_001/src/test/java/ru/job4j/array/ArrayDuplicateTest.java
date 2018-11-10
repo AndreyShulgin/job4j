@@ -14,4 +14,13 @@ import static org.junit.Assert.assertThat;
         String[] expect = {"Привет", "Мир", "Супер"};
         assertThat(newInput, arrayContainingInAnyOrder(expect));
     }
+
+    @Test
+        public void whenRemoveDuplicatesThenWithoutDuplicateNumbers() {
+        ArrayDuplicate array = new ArrayDuplicate();
+        String[] input = {"1", "1", "2", "2", "1", "3", "3"};
+        String[] result = array.remove(input);
+        String[] expect = {"1", "2", "3"};
+        assertThat(result, arrayContainingInAnyOrder(expect));
+    }
 }
