@@ -70,33 +70,28 @@ public class Logic {
         int[][] table = this.convert();
         boolean result = false;
         int count = 0;
-        for (int i = 0; i < table.length - 1; i++) {
-            for (int j = 0; j < table.length - 1; j++) {
-                if (table[i][j] == 1 && table[i][j + 1] == 1) {
-                    for (int horizontal = 0; horizontal < table.length; horizontal++) {
-                        if (table[i][horizontal] == 1) {
-                            count++;
-                            if (count == table.length) {
-                                result = true;
-                                break;
-                            }
-                        }
+        for (int[] aTable : table) {
+            for (int horizontal = 0; horizontal < table.length; horizontal++) {
+                if (aTable[horizontal] == 1) {
+                    count++;
+                    if (count == table.length) {
+                        result = true;
+                        break;
                     }
-                    count = 0;
-                }
-                if (table[i][j] == 1 && table[i + 1][j] == 1) {
-                        for (int vertical = 0; vertical < table.length; vertical++) {
-                            if (table[vertical][j] == 1) {
-                                count++;
-                                if (count == table.length) {
-                                    result = true;
-                                    break;
-                                }
-                            }
-                        }
-                        count = 0;
                 }
             }
+            count = 0;
+        }
+        for (int in = 0; in < table.length; in++) {
+            for (int[] aTable : table) {
+                if (aTable[in] == 1) {
+                    count++;
+                    if (count == table.length) {
+                        result = true;
+                    }
+                }
+            }
+            count = 0;
         }
         return result;
     }
