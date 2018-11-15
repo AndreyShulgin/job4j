@@ -11,7 +11,7 @@ public class FindLoop {
      * @return индекс числа, или -1, если числа нет.
      */
     public int indexOf(int[] data, int el) {
-        int rst = -1; //
+        int rst = -1; 
         for (int index = 0; index < data.length; index++) {
             if (data[index] == el) {
                 rst = index;

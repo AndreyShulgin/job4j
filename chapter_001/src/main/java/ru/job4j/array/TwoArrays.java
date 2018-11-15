@@ -7,35 +7,35 @@ package ru.job4j.array;
 public class TwoArrays {
     /**
      * Метод из двух массивов делает один отсортированный массив.
-     * @param firstArray - первый массив.
-     * @param secondArray - второй массив.
+     * @param a - первый массив.
+     * @param b - второй массив.
      * @return - отсортированный по возрастанию массив.
      */
-    public int[] sortArrayOfTwoArrays(int[] firstArray, int[] secondArray) {
+    public int[] sortArrayOfTwoArrays(int[] a, int[] b) {
         BubbleSort bubbleSort = new BubbleSort();
-        int[] sortFirstArray = bubbleSort.sort(firstArray);
-        int[] sortSecondArray = bubbleSort.sort(secondArray);
-        int[] arrayOfThoArrays = new int[sortFirstArray.length + sortSecondArray.length];
-        int countFirstArray = 0;
-        int countSecondArray = 0;
-        for (int index = 0; index < arrayOfThoArrays.length; index++) {
-            if (sortFirstArray[countFirstArray] < sortSecondArray[countSecondArray]) {
-                arrayOfThoArrays[index] = sortFirstArray[countFirstArray];
-                countFirstArray++;
-                if (countFirstArray == sortFirstArray.length) {
-                    countFirstArray--;
-                    sortFirstArray[countFirstArray] += sortSecondArray[countSecondArray];
+        int[] first = bubbleSort.sort(a);
+        int[] second = bubbleSort.sort(b);
+        int[] arrays = new int[first.length + second.length];
+        int countA = 0;
+        int countB = 0;
+        for (int index = 0; index < arrays.length; index++) {
+            if (first[countA] < second[countB]) {
+                arrays[index] = first[countA];
+                countA++;
+                if (countA == first.length) {
+                    countA--;
+                    first[countA] += second[countB];
                 }
             } else {
-                arrayOfThoArrays[index] = sortSecondArray[countSecondArray];
-                countSecondArray++;
-                if (countSecondArray == sortSecondArray.length) {
-                    countSecondArray--;
-                    sortSecondArray[countSecondArray] += sortFirstArray[countFirstArray];
+                arrays[index] = second[countB];
+                countB++;
+                if (countB == second.length) {
+                    countB--;
+                    second[countB] += first[countA];
                 }
             }
         }
 
-        return arrayOfThoArrays;
+        return arrays;
     }
 }
