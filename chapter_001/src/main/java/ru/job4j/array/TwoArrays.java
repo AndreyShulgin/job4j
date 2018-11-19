@@ -18,23 +18,17 @@ public class TwoArrays {
         int countArrays = 0;
         while (countFirst < first.length && countSecond < second.length) {
             if (first[countFirst] < second[countSecond]) {
-                arrays[countArrays] = first[countFirst];
-                countFirst++;
+                arrays[countArrays] = first[countFirst++];
             } else {
-                arrays[countArrays] = second[countSecond];
-                countSecond++;
+                arrays[countArrays] = second[countSecond++];
             }
             countArrays++;
         }
         while (countFirst < first.length) {
-            arrays[countArrays] = first[countFirst];
-            countArrays++;
-            countFirst++;
+            arrays[countArrays++] = first[countFirst++];
         }
         while (countSecond < second.length) {
-            arrays[countArrays] = second[countSecond];
-            countArrays++;
-            countSecond++;
+            arrays[countArrays++] = second[countSecond++];
         }
         return arrays;
     }
