@@ -8,8 +8,8 @@ public class TwoArraysTest {
     @Test
     public void whenSortTwoArraysByTrueThenTrue() {
         TwoArrays twoArrays = new TwoArrays();
-        int[] first = {3, 1, 4};
-        int[] second = {5, 2, 6};
+        int[] first = {1, 3, 4};
+        int[] second = {2, 5, 6};
         int[] result = twoArrays.sortArrayOfTwoArrays(first, second);
         int[] expect = {1, 2, 3, 4, 5, 6};
         assertThat(result, is(expect));
@@ -17,8 +17,8 @@ public class TwoArraysTest {
     @Test
     public void whenSortArraysByTrueThenTrue() {
         TwoArrays twoArrays = new TwoArrays();
-        int[] first = {1, 5, 3, 4};
-        int[] second = {6, 2};
+        int[] first = {1, 3, 4, 5};
+        int[] second = {2, 6};
         int[] result = twoArrays.sortArrayOfTwoArrays(first, second);
         int[] expect = {1, 2, 3, 4, 5, 6};
         assertThat(result, is(expect));

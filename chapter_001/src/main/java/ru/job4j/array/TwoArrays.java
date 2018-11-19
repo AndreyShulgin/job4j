@@ -7,35 +7,35 @@ package ru.job4j.array;
 public class TwoArrays {
     /**
      * Метод из двух массивов делает один отсортированный массив.
-     * @param a - первый массив.
-     * @param b - второй массив.
+     * @param first - первый массив.
+     * @param second - второй массив.
      * @return - отсортированный по возрастанию массив.
      */
-    public int[] sortArrayOfTwoArrays(int[] a, int[] b) {
-        BubbleSort bubbleSort = new BubbleSort();
-        int[] first = bubbleSort.sort(a);
-        int[] second = bubbleSort.sort(b);
+    public int[] sortArrayOfTwoArrays(int[] first, int[] second) {
         int[] arrays = new int[first.length + second.length];
-        int countA = 0;
-        int countB = 0;
-        for (int index = 0; index < arrays.length; index++) {
-            if (first[countA] < second[countB]) {
-                arrays[index] = first[countA];
-                countA++;
-                if (countA == first.length) {
-                    countA--;
-                    first[countA] += second[countB];
-                }
+        int countFirst = 0;
+        int countSecond = 0;
+        int countArrays = 0;
+        while (countFirst < first.length && countSecond < second.length) {
+            if (first[countFirst] < second[countSecond]) {
+                arrays[countArrays] = first[countFirst];
+                countFirst++;
             } else {
-                arrays[index] = second[countB];
-                countB++;
-                if (countB == second.length) {
-                    countB--;
-                    second[countB] += first[countA];
-                }
+                arrays[countArrays] = second[countSecond];
+                countSecond++;
             }
+            countArrays++;
         }
-
+        while (countFirst < first.length) {
+            arrays[countArrays] = first[countFirst];
+            countArrays++;
+            countFirst++;
+        }
+        while (countSecond < second.length) {
+            arrays[countArrays] = second[countSecond];
+            countArrays++;
+            countSecond++;
+        }
         return arrays;
     }
 }
