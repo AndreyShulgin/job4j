@@ -47,7 +47,7 @@ public class Item {
         this.comments = comments;
     }
 
-    public Item (String name, String desc, long created) {
+    public Item(String name, String desc, long created) {
         this.name = name;
         this.desc = desc;
         this.created = created;

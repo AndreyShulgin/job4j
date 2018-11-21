@@ -1,8 +1,10 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
+ * @author Andrey Shulgin (neonod404@gmail.com).
  * @version $Id$
  * @since 0.1
  */
@@ -16,6 +18,7 @@ public class Tracker {
      * Указатель ячейки для новой заявки.
      */
     private int position = 0;
+
     private static final Random RN = new Random();
 
     /**
@@ -37,6 +40,11 @@ public class Tracker {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 
+    /**
+     * Метод заменяет заявку по уникальному ключу.
+     * @param id Уникальный ключ.
+     * @param item Новая заявка.
+     */
     public void replace(String id, Item item) {
         for (int index = 0; index < items.length; index++) {
             if (items[index].getId().equals(id)) {
@@ -46,39 +54,51 @@ public class Tracker {
         }
     }
 
+    /**
+     * Метод удаляет заявку по уникальному ключу.
+     * @param id Уникальный ключ.
+     */
     public void delete(String id) {
-        Item[] result = new Item[position - 1];
-        for (int index = 0; index < items.length; index++) {
+        for (int index = 0; index < position; index++) {
             if (items[index].getId().equals(id)) {
-                System.arraycopy(items, 0, result, 0, index);
-                System.arraycopy(items, index + 1, result, index, items.length - index);
+                System.arraycopy(items, index + 1, items, index, position - index);
+                position--;
+                break;
             }
         }
     }
 
+    /**
+     * Метод копирует все заполненные заявки в другой массив.
+     * @return Возвращает копию массива без Null элементов.
+     */
     public Item[] findAll() {
         Item[] itemsAll = new Item[position];
         System.arraycopy(items, 0, itemsAll, 0, position);
         return itemsAll;
     }
 
+    /**
+     * Метод ищет все заявки с одинаковым именем и копирует их в отдельный массив.
+     * @param key Ключевое имя.
+     * @return Возвращает массив с заявками, в котрых имя совдает с ключевым именем.
+     */
     public Item[] findByName(String key) {
-        int count = 0;
-        for (Item item : items) {
-            if (item.getName().equals(key)) {
-                count++;
+        Item[] names = new Item[position];
+        int namesCount = 0;
+        for (int i = 0; i < position; i++) {
+            if (items[i].getName().equals(key)) {
+                names[namesCount++] = items[i];
             }
         }
-        Item[] names = new Item[count];
-        int namesCount=0;
-        for (Item item : items) {
-            if (item.getName().equals(key)) {
-                names[namesCount] = item;
-            }
-        }
-        return names;
+        return Arrays.copyOf(names, namesCount);
     }
 
+    /**
+     * Метод ищет заявки по уникальному ключу.
+     * @param id Уникальный ключ.
+     * @return Возвращает заявку по ключу.
+     */
     public Item findById(String id) {
         Item result = null;
         for (Item item : this.items) {
