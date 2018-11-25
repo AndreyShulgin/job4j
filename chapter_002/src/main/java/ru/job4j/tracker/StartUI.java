@@ -29,12 +29,12 @@ public class StartUI {
     /**
      * Константа меню для поиска по ID.
      */
-    public static final String FINDID = "4";
+    public static final String FIND_BY_ID = "4";
 
     /**
      * Константа меню для поиска одинаковых заявок.
      */
-    public static final String FINDNAME = "5";
+    public static final String FIND_BY_NAME = "5";
 
     /**
      * Константа для выхода из цикла.
@@ -76,9 +76,9 @@ public class StartUI {
                 this.editItem();
             } else if (DELETE.equals(answer)) {
                 this.deleteItem();
-            } else if (FINDID.equals(answer)) {
+            } else if (FIND_BY_ID.equals(answer)) {
                 this.findItemById();
-            } else if (FINDNAME.equals(answer)) {
+            } else if (FIND_BY_NAME.equals(answer)) {
                 this.findItemsByName();
             } else if (EXIT.equals(answer)) {
                 exit = true;
@@ -115,10 +115,15 @@ public class StartUI {
     private void editItem() {
         System.out.println("------------ Редактирование заявки --------------");
         String id = this.input.ask("Введите уникальны ключ (ID) вашей заявки :");
+        if (tracker.findById(id) == null) {
+            System.out.println("Заявка с таким ID не найдена.");
+        } else {
         String name = this.input.ask("Введите имя заявки :");
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
         tracker.replace(id, item);
+            System.out.println("Заявка изменена.");
+        }
     }
 
     /**
@@ -127,8 +132,11 @@ public class StartUI {
     private void deleteItem() {
         System.out.println("------------ Удаление заявки --------------");
         String id = this.input.ask("Введите уникальный ключ (ID) заявки для удаления :");
-        tracker.delete(id);
-        System.out.println("Заявка удалена.");
+        if (tracker.delete(id)) {
+            System.out.println("Заявка удалена.");
+        } else {
+            System.out.println("Заявка не найдена.");
+        }
     }
 
     /**
@@ -137,8 +145,12 @@ public class StartUI {
     private void findItemById() {
         System.out.println("------------ Поиск заявки по уникальному ключу (ID) --------------");
         String id = this.input.ask("Введите уникальный ключ (ID) заявки :");
-        System.out.println("Имя заявки :\n" + tracker.findById(id).getName());
-        System.out.println("Описание :\n" + tracker.findById(id).getDesc());
+        if (tracker.findById(id) != null) {
+            System.out.println("Имя заявки :\n" + tracker.findById(id).getName());
+            System.out.println("Описание :\n" + tracker.findById(id).getDesc());
+        } else {
+            System.out.println("Заявка с таким ID не найдена.");
+        }
     }
 
     /**

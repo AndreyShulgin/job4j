@@ -46,6 +46,7 @@ public class Tracker {
      * @param item Новая заявка.
      */
     public void replace(String id, Item item) {
+        item.setId(id);
         for (int index = 0; index < items.length; index++) {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
@@ -58,14 +59,17 @@ public class Tracker {
      * Метод удаляет заявку по уникальному ключу.
      * @param id Уникальный ключ.
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean existence = false;
         for (int index = 0; index < position; index++) {
             if (items[index].getId().equals(id)) {
                 System.arraycopy(items, index + 1, items, index, position - index);
                 position--;
+                existence = true;
                 break;
             }
         }
+        return existence;
     }
 
     /**
