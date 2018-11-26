@@ -115,14 +115,13 @@ public class StartUI {
     private void editItem() {
         System.out.println("------------ Редактирование заявки --------------");
         String id = this.input.ask("Введите уникальны ключ (ID) вашей заявки :");
-        if (tracker.findById(id) == null) {
-            System.out.println("Заявка с таким ID не найдена.");
-        } else {
         String name = this.input.ask("Введите имя заявки :");
         String desc = this.input.ask("Введите описание заявки :");
         Item item = new Item(name, desc);
-        tracker.replace(id, item);
+        if (tracker.replace(id, item)) {
             System.out.println("Заявка изменена.");
+        } else {
+            System.out.println("Заявка с таким ID не найдена.");
         }
     }
 
@@ -145,9 +144,10 @@ public class StartUI {
     private void findItemById() {
         System.out.println("------------ Поиск заявки по уникальному ключу (ID) --------------");
         String id = this.input.ask("Введите уникальный ключ (ID) заявки :");
-        if (tracker.findById(id) != null) {
-            System.out.println("Имя заявки :\n" + tracker.findById(id).getName());
-            System.out.println("Описание :\n" + tracker.findById(id).getDesc());
+        Item byId = tracker.findById(id);
+        if (byId != null) {
+            System.out.println("Имя заявки :\n" + byId.getName());
+            System.out.println("Описание :\n" + byId.getDesc());
         } else {
             System.out.println("Заявка с таким ID не найдена.");
         }
@@ -167,13 +167,7 @@ public class StartUI {
 
 
     private void showMenu() {
-        System.out.println("0. Добавить новую заявку\n" +
-                "1. Показать все заявки\n" +
-                "2. Редактировать заявку\n" +
-                "3. Удалить заявку\n" +
-                "4. Поиск заявки по уникальному ключу (ID)\n" +
-                "5. Поиск заявки по имени\n" +
-                "6. Выход");
+        System.out.println("0. Добавить новую заявку\n" + "1. Показать все заявки\n" + "2. Редактировать заявку\n" + "3. Удалить заявку\n" + "4. Поиск заявки по уникальному ключу (ID)\n" + "5. Поиск заявки по имени\n" + "6. Выход");
     }
 
     /**

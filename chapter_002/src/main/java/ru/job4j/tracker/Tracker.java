@@ -45,14 +45,17 @@ public class Tracker {
      * @param id Уникальный ключ.
      * @param item Новая заявка.
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
         item.setId(id);
+        boolean existence = false;
         for (int index = 0; index < items.length; index++) {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
+                existence = true;
                 break;
             }
         }
+        return existence;
     }
 
     /**
