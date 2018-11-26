@@ -47,15 +47,15 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         item.setId(id);
-        boolean existence = false;
-        for (int index = 0; index < items.length; index++) {
+        boolean existense = false;
+        for (int index = 0; index < position; index++) {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
-                existence = true;
+                existense = true;
                 break;
             }
         }
-        return existence;
+        return existense;
     }
 
     /**
