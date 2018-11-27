@@ -47,15 +47,15 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         item.setId(id);
-        boolean existense = false;
+        boolean existence = false;
         for (int index = 0; index < position; index++) {
             if (items[index].getId().equals(id)) {
                 items[index] = item;
-                existense = true;
+                existence = true;
                 break;
             }
         }
-        return existense;
+        return existence;
     }
 
     /**
@@ -80,9 +80,7 @@ public class Tracker {
      * @return Возвращает копию массива без Null элементов.
      */
     public Item[] findAll() {
-        Item[] itemsAll = new Item[position];
-        System.arraycopy(items, 0, itemsAll, 0, position);
-        return itemsAll;
+        return Arrays.copyOf(items, position);
     }
 
     /**

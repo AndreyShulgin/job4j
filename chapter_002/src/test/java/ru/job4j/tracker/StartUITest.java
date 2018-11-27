@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
@@ -65,28 +66,30 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("name"));
     }
-    /*
+
        /**
         * Тест метода findItemById.
-        *
+        */
     @Test
-    public void whenFindByIdThenItemFound(){
+    public void whenFindByIdThenItemFound() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[] {"4", item.getId(), "6"});
         new StartUI(input, tracker).init();
+        assertThat(tracker.findById(item.getId()).getId(), is(item.getId()));
     }
 
     /**
      * Тест метода findItemById.
      * Заявка не найдена.
-     *
+     */
     @Test
-    public void whenFindByIdThenNotFound(){
+    public void whenFindByIdThenNotFound() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[] {"4", "неправильный ID", "6"});
         new StartUI(input, tracker).init();
+        assertNull(tracker.findById("неправильный ID"));
     }
-    */
+
 }
