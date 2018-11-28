@@ -1,6 +1,10 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
@@ -92,4 +96,71 @@ public class StartUITest {
         assertNull(tracker.findById("неправильный ID"));
     }
 
+    /**
+     * Тест метода showAllItem.
+     */
+    @Test
+    public void whenFindAllThenAllItem() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("name", "desc"));
+        Item item1 = tracker.add(new Item("name1", "desc1"));
+        Input input = new StubInput(new String[] {"1", "6"});
+        PrintStream stdout = System.out;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()),
+                is("0. Добавить новую заявку\n" +
+                        "1. Показать все заявки\n" +
+                        "2. Редактировать заявку\n" +
+                        "3. Удалить заявку\n" +
+                        "4. Поиск заявки по уникальному ключу (ID)\n" +
+                        "5. Поиск заявки по имени\n" +
+                        "6. Выход\r\n" +
+                        "------------ Список заявок --------------\r\n" +
+                        "name\r\n" +
+                        "name1\r\n" +
+                        "0. Добавить новую заявку\n" +
+                        "1. Показать все заявки\n" +
+                        "2. Редактировать заявку\n" +
+                        "3. Удалить заявку\n" +
+                        "4. Поиск заявки по уникальному ключу (ID)\n" +
+                        "5. Поиск заявки по имени\n" +
+                        "6. Выход\r\n"));
+        System.setOut(stdout);
+    }
+    /**
+     * Тест метода findItemsByName.
+     */
+    @Test
+    public void whenFindByNameThenDescNames() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item("name", "desc1"));
+        Item item1 = tracker.add(new Item("name", "desc2"));
+        Input input = new StubInput(new String[] {"5", "name", "6"});
+        PrintStream stdout = System.out;
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        new StartUI(input, tracker).init();
+        assertThat(new String(out.toByteArray()),
+                is(
+                        "0. Добавить новую заявку\n" +
+                                "1. Показать все заявки\n" +
+                                "2. Редактировать заявку\n" +
+                                "3. Удалить заявку\n" +
+                                "4. Поиск заявки по уникальному ключу (ID)\n" +
+                                "5. Поиск заявки по имени\n" +
+                                "6. Выход\r\n" +
+                                "------------ Поиск заявок по имени --------------\r\n" +
+                                "desc1\r\n" +
+                                "desc2\r\n" +
+                                "0. Добавить новую заявку\n" +
+                                "1. Показать все заявки\n" +
+                                "2. Редактировать заявку\n" +
+                                "3. Удалить заявку\n" +
+                                "4. Поиск заявки по уникальному ключу (ID)\n" +
+                                "5. Поиск заявки по имени\n" +
+                                "6. Выход\r\n"));
+        System.setOut(stdout);
+    }
 }
