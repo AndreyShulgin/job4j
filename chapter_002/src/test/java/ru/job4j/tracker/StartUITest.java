@@ -10,14 +10,16 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
-    private String menu =
-            "0. Добавить новую заявку\n" +
-            "1. Показать все заявки\n" +
-            "2. Редактировать заявку\n" +
-            "3. Удалить заявку\n" +
-            "4. Поиск заявки по уникальному ключу (ID)\n" +
-            "5. Поиск заявки по имени\n" +
-            "6. Выход" +  System.lineSeparator();
+    private String ls = System.lineSeparator();
+    private String menu = new StringBuilder()
+            .append("0. Добавить новую заявку").append(ls)
+            .append("1. Показать все заявки").append(ls)
+            .append("2. Редактировать заявку").append(ls)
+            .append("3. Удалить заявку").append(ls)
+            .append("4. Поиск заявки по уникальному ключу (ID)").append(ls)
+            .append("5. Поиск заявки по имени").append(ls)
+            .append("6. Выход").append(ls)
+            .toString();
     /**
      * Тест метода createItem.
      */
