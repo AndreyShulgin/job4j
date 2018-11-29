@@ -10,6 +10,14 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
+    private String menu =
+            "0. Добавить новую заявку\n" +
+            "1. Показать все заявки\n" +
+            "2. Редактировать заявку\n" +
+            "3. Удалить заявку\n" +
+            "4. Поиск заявки по уникальному ключу (ID)\n" +
+            "5. Поиск заявки по имени\n" +
+            "6. Выход" +  System.lineSeparator();
     /**
      * Тест метода createItem.
      */
@@ -110,23 +118,11 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
-                is("0. Добавить новую заявку\n" +
-                        "1. Показать все заявки\n" +
-                        "2. Редактировать заявку\n" +
-                        "3. Удалить заявку\n" +
-                        "4. Поиск заявки по уникальному ключу (ID)\n" +
-                        "5. Поиск заявки по имени\n" +
-                        "6. Выход\r\n" +
-                        "------------ Список заявок --------------\r\n" +
-                        "name\r\n" +
-                        "name1\r\n" +
-                        "0. Добавить новую заявку\n" +
-                        "1. Показать все заявки\n" +
-                        "2. Редактировать заявку\n" +
-                        "3. Удалить заявку\n" +
-                        "4. Поиск заявки по уникальному ключу (ID)\n" +
-                        "5. Поиск заявки по имени\n" +
-                        "6. Выход\r\n"));
+                is(menu +
+                        "------------ Список заявок --------------" + System.lineSeparator() +
+                        "name" + System.lineSeparator() +
+                        "name1" + System.lineSeparator() +
+                        menu));
         System.setOut(stdout);
     }
     /**
@@ -143,24 +139,11 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
-                is(
-                        "0. Добавить новую заявку\n" +
-                                "1. Показать все заявки\n" +
-                                "2. Редактировать заявку\n" +
-                                "3. Удалить заявку\n" +
-                                "4. Поиск заявки по уникальному ключу (ID)\n" +
-                                "5. Поиск заявки по имени\n" +
-                                "6. Выход\r\n" +
-                                "------------ Поиск заявок по имени --------------\r\n" +
-                                "desc1\r\n" +
-                                "desc2\r\n" +
-                                "0. Добавить новую заявку\n" +
-                                "1. Показать все заявки\n" +
-                                "2. Редактировать заявку\n" +
-                                "3. Удалить заявку\n" +
-                                "4. Поиск заявки по уникальному ключу (ID)\n" +
-                                "5. Поиск заявки по имени\n" +
-                                "6. Выход\r\n"));
+                is(menu +
+                        "------------ Поиск заявок по имени --------------" + System.lineSeparator() +
+                        "desc1" + System.lineSeparator() +
+                        "desc2" + System.lineSeparator() +
+                        menu));
         System.setOut(stdout);
     }
 }
