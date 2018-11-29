@@ -27,24 +27,23 @@ public class PaintTest {
     @Test
     public void whenDrawSquare() {
         new Paint().draw(new Square());
-        assertThat(
-                new String(out.toByteArray()),
-                is(new StringBuilder()
-                        .append("++++\n")
-                        .append("++++\n")
-                        .append("++++\n")
-                        .append("++++")
-                        .append(System.lineSeparator()).toString()));
+        assertThat(new String(out.toByteArray()), is(
+                new StringBuilder()
+                        .append("++++").append(System.lineSeparator())
+                        .append("++++").append(System.lineSeparator())
+                        .append("++++").append(System.lineSeparator())
+                        .append("++++").append(System.lineSeparator())
+                        .toString()));
     }
     @Test
     public void whenDrawTriangle() {
         new Paint().draw(new Triangle());
         assertThat(new String(out.toByteArray()), is(
                 new StringBuilder()
-                            .append("   0\n")
-                            .append("  000\n")
-                            .append(" 00000\n")
-                            .append("0000000")
-                            .append(System.lineSeparator()).toString()));
+                            .append("   0").append(System.lineSeparator())
+                            .append("  000").append(System.lineSeparator())
+                            .append(" 00000").append(System.lineSeparator())
+                            .append("0000000").append(System.lineSeparator())
+                            .toString()));
     }
 }

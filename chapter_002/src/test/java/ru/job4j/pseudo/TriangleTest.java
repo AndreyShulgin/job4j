@@ -9,9 +9,10 @@ public class TriangleTest {
     public void whenDrawTriangle() {
         Triangle triangle = new Triangle();
         assertThat(triangle.draw(), is(new StringBuilder()
-                .append("   0\n")
-                .append("  000\n")
-                .append(" 00000\n")
-                .append("0000000").toString()));
+                .append("   0").append(System.lineSeparator())
+                .append("  000").append(System.lineSeparator())
+                .append(" 00000").append(System.lineSeparator())
+                .append("0000000")
+                .toString()));
     }
 }
