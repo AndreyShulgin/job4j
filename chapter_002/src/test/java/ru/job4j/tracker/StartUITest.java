@@ -12,12 +12,12 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
     private String ls = System.lineSeparator();
     private String menu = new StringBuilder()
-            .append("0. Добавить новую заявку").append(ls)
-            .append("1. Показать все заявки").append(ls)
-            .append("2. Редактировать заявку").append(ls)
-            .append("3. Удалить заявку").append(ls)
+            .append("0. Добавление новой заявки").append(ls)
+            .append("1. Список заявок").append(ls)
+            .append("2. Редактирование заявки").append(ls)
+            .append("3. Удаление заявки").append(ls)
             .append("4. Поиск заявки по уникальному ключу (ID)").append(ls)
-            .append("5. Поиск заявки по имени").append(ls)
+            .append("5. Поиск заявок по имени").append(ls)
             .append("6. Выход").append(ls)
             .toString();
     /**
@@ -26,7 +26,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("name"));
     }
@@ -38,7 +38,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input inputUpdate = new StubInput(new String[] {"2", item.getId(), "new name", "new desc", "6"});
+        Input inputUpdate = new StubInput(new String[] {"2", item.getId(), "new name", "new desc", "y"});
         new StartUI(inputUpdate, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("new name"));
     }
@@ -51,7 +51,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasNotUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input inputUpdate = new StubInput(new String[] {"2", "неправильный ID", "new name", "new desc", "6"});
+        Input inputUpdate = new StubInput(new String[] {"2", "неправильный ID", "new name", "new desc", "y"});
         new StartUI(inputUpdate, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("name"));
     }
@@ -64,7 +64,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item0 = tracker.add(new Item("name", "desc"));
         Item item1 = tracker.add(new Item("name delete", "desc delete"));
-        Input input = new StubInput(new String[] {"3", item0.getId(), "6"});
+        Input input = new StubInput(new String[] {"3", item0.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("name delete"));
     }
@@ -76,7 +76,7 @@ public class StartUITest {
     public void whenDeleteThenItemNotFound() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input input = new StubInput(new String[] {"3", "неправильный ID", "6"});
+        Input input = new StubInput(new String[] {"3", "неправильный ID", "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findAll()[0].getName(), is("name"));
     }
@@ -88,7 +88,7 @@ public class StartUITest {
     public void whenFindByIdThenItemFound() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input input = new StubInput(new String[] {"4", item.getId(), "6"});
+        Input input = new StubInput(new String[] {"4", item.getId(), "y"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getId(), is(item.getId()));
     }
@@ -101,7 +101,7 @@ public class StartUITest {
     public void whenFindByIdThenNotFound() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        Input input = new StubInput(new String[] {"4", "неправильный ID", "6"});
+        Input input = new StubInput(new String[] {"4", "неправильный ID", "y"});
         new StartUI(input, tracker).init();
         assertNull(tracker.findById("неправильный ID"));
     }
@@ -114,7 +114,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Item item1 = tracker.add(new Item("name1", "desc1"));
-        Input input = new StubInput(new String[] {"1", "6"});
+        Input input = new StubInput(new String[] {"1", "y"});
         PrintStream stdout = System.out;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
@@ -123,8 +123,7 @@ public class StartUITest {
                 is(menu +
                         "------------ Список заявок --------------" + System.lineSeparator() +
                         "name" + System.lineSeparator() +
-                        "name1" + System.lineSeparator() +
-                        menu));
+                        "name1" + System.lineSeparator()));
         System.setOut(stdout);
     }
     /**
@@ -135,7 +134,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc1"));
         Item item1 = tracker.add(new Item("name", "desc2"));
-        Input input = new StubInput(new String[] {"5", "name", "6"});
+        Input input = new StubInput(new String[] {"5", "name", "y"});
         PrintStream stdout = System.out;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
@@ -144,8 +143,7 @@ public class StartUITest {
                 is(menu +
                         "------------ Поиск заявок по имени --------------" + System.lineSeparator() +
                         "desc1" + System.lineSeparator() +
-                        "desc2" + System.lineSeparator() +
-                        menu));
+                        "desc2" + System.lineSeparator()));
         System.setOut(stdout);
     }
 }

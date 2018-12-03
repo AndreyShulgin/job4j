@@ -35,7 +35,7 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = new ArrayList<>();
         menu.fillActions();
-        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+        for (int i = 0; i < menu.getActionsLength(); i++) {
             range.add(i);
         }
         do {
@@ -45,6 +45,7 @@ public class StartUI {
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
+
     /**
      * Запускт программы.
      * @param args - Args.
@@ -53,3 +54,4 @@ public class StartUI {
         new StartUI(new ConsoleInput(), new Tracker()).init();
     }
 }
+
