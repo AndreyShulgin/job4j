@@ -221,8 +221,6 @@ public class MenuTracker {
 
         @Override
         public void execute(Input input, Tracker tracker) {
-            StartUI startUI = new StartUI(input, tracker);
-            startUI.exit();
         }
 
         @Override

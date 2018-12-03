@@ -44,14 +44,10 @@ public class StartUI {
             menu.show();
             int key = Integer.valueOf(input.ask("Выберите :"));
             menu.select(key);
-            if (!exit) {
+            if (key == 6) {
                 break;
             }
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
-    }
-
-    public void exit() {
-        exit = true;
     }
 
     /**
