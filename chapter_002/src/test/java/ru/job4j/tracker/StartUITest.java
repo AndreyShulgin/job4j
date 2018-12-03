@@ -120,12 +120,12 @@ public class StartUITest {
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(new String(out.toByteArray()),
-                is(menu +
-                        "------------ Список заявок --------------" + System.lineSeparator() +
+                is(menu + "------------ Список заявок --------------" + System.lineSeparator() +
                         "name" + System.lineSeparator() +
                         "desc" + System.lineSeparator() +
                         "name1" + System.lineSeparator() +
-                        "desc1" + System.lineSeparator()));
+                        "desc1" + System.lineSeparator() +
+                        menu));
         System.setOut(stdout);
     }
     /**
@@ -145,7 +145,8 @@ public class StartUITest {
                 is(menu +
                         "------------ Поиск заявок по имени --------------" + System.lineSeparator() +
                         "desc1" + System.lineSeparator() +
-                        "desc2" + System.lineSeparator()));
+                        "desc2" + System.lineSeparator() +
+                         menu));
         System.setOut(stdout);
     }
 }
