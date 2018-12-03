@@ -123,7 +123,9 @@ public class StartUITest {
                 is(menu +
                         "------------ Список заявок --------------" + System.lineSeparator() +
                         "name" + System.lineSeparator() +
-                        "name1" + System.lineSeparator()));
+                        "desc" + System.lineSeparator() +
+                        "name1" + System.lineSeparator() +
+                        "desc1" + System.lineSeparator()));
         System.setOut(stdout);
     }
     /**

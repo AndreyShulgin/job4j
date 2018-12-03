@@ -62,4 +62,3 @@ public class StartUI {
         new StartUI(new ConsoleInput(), new Tracker()).init();
     }
 }
-

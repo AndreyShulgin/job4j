@@ -132,6 +132,7 @@ public class MenuTracker {
             Item[] all = tracker.findAll();
             for (Item anAll : all) {
                 System.out.println(anAll.getName());
+                System.out.println(anAll.getDesc());
             }
         }
 
@@ -176,8 +177,8 @@ public class MenuTracker {
             String id = input.ask("Введите уникальный ключ (ID) заявки :");
             Item byId = tracker.findById(id);
             if (byId != null) {
-                System.out.println("Имя заявки :\n" + byId.getName());
-                System.out.println("Описание :\n" + byId.getDesc());
+                System.out.println("Имя заявки :" + System.lineSeparator() + byId.getName());
+                System.out.println("Описание :" + System.lineSeparator() + byId.getDesc());
             } else {
                 System.out.println("Заявка с таким ID не найдена.");
             }
