@@ -18,6 +18,8 @@ public class StartUI {
      */
     private final Tracker tracker;
 
+    private boolean exit = false;
+
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
@@ -42,9 +44,15 @@ public class StartUI {
             menu.show();
             int key = Integer.valueOf(input.ask("Выберите :"));
             menu.select(key);
+            if (!exit) {
+                break;
+            }
         } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
+    public void exit() {
+        exit = true;
+    }
 
     /**
      * Запускт программы.
