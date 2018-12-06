@@ -47,4 +47,19 @@ public class ValidateInputTest {
                 )
         );
     }
+    @Test
+    public void whenNotArrayInput() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"7", "1"})
+        );
+        List<Integer> range = new ArrayList<>();
+        range.add(1);
+        input.ask("Enter", range);
+        assertThat(
+                this.mem.toString(),
+                is(
+                        new StringBuilder().append("Необходимо выбрать значение из диапазона меню") + System.lineSeparator()
+                )
+        );
+    }
 }

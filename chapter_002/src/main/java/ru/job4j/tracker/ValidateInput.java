@@ -20,12 +20,14 @@ public class ValidateInput implements Input {
             try {
                 value = this.input.ask(question, range);
                 invalid = false;
-            } catch (NumberFormatException nfe ) {
+            } catch (NumberFormatException nfe) {
                 System.out.println("Пожалуйста, введите корректные данные");
             } catch (MenuOutException moe) {
+                System.out.println("Необходимо выбрать  другое");
+            } catch (UnsupportedOperationException uoe) {
                 System.out.println("Необходимо выбрать значение из диапазона меню");
             }
-        }while (invalid);
+        } while (invalid);
         return value;
     }
 }

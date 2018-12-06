@@ -39,14 +39,14 @@ public class StubInput implements Input {
     public int ask(String question, List<Integer> range) {
         int key = Integer.valueOf(this.ask(question));
         boolean exist = false;
-        for (int value : range){
+        for (int value : range) {
             if (value == key) {
                 exist = true;
                 break;
             }
         }
         if (!exist) {
-            throw new UnsupportedOperationException("Unsupported operation");
+            throw new UnsupportedOperationException("Неправильная операция.");
         }
         return key;
     }
