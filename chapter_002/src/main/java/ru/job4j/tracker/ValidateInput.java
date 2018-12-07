@@ -23,9 +23,7 @@ public class ValidateInput implements Input {
             } catch (NumberFormatException nfe) {
                 System.out.println("Пожалуйста, введите корректные данные");
             } catch (MenuOutException moe) {
-                System.out.println("Необходимо выбрать  другое");
-            } catch (UnsupportedOperationException uoe) {
-                System.out.println("Необходимо выбрать значение из диапазона меню");
+                System.out.println("Необходимо выбрать значение из диапозона меню");
             }
         } while (invalid);
         return value;

@@ -46,7 +46,7 @@ public class StubInput implements Input {
             }
         }
         if (!exist) {
-            throw new UnsupportedOperationException("Неправильная операция.");
+            throw new MenuOutException("Не входит в диапозон меню");
         }
         return key;
     }

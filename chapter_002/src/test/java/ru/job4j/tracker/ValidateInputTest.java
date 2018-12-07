@@ -58,7 +58,7 @@ public class ValidateInputTest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        new StringBuilder().append("Необходимо выбрать значение из диапазона меню") + System.lineSeparator()
+                        new StringBuilder().append("Необходимо выбрать значение из диапозона меню") + System.lineSeparator()
                 )
         );
     }
