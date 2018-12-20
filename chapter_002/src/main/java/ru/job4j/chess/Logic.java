@@ -2,8 +2,6 @@ package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.*;
 
-import java.util.Optional;
-
 /**
  * //TODO add comments.
  *
@@ -29,12 +27,8 @@ public class Logic {
                 rst = true;
                 this.figures[index] = this.figures[index].copy(dest);
             }
-        } catch (FigureNotFoundException ffe) {
+        } catch (FigureNotFoundException | ImpossibleMoveException | OccupiedWayException ffe) {
             System.out.println(ffe.getLocalizedMessage());
-        } catch (ImpossibleMoveException ime) {
-            System.out.println(ime.getLocalizedMessage());
-        } catch (OccupiedWayException owe) {
-            System.out.println(owe.getLocalizedMessage());
         }
         return rst;
     }

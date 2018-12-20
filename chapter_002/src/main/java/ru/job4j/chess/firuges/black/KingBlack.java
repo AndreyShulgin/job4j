@@ -2,6 +2,7 @@ package ru.job4j.chess.firuges.black;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.ImpossibleMoveException;
 
 /**
  *
@@ -21,6 +22,16 @@ public class KingBlack extends Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) {
+        if (!(source.y == dest.y + 1 && source.x == dest.x ||
+                source.y == dest.y - 1 && source.x == dest.x ||
+                source.y == dest.y && source.x == dest.x + 1 ||
+                source.y == dest.y && source.x == dest.x - 1 ||
+                source.y == dest.y + 1 && source.x == dest.x + 1 ||
+                source.y == dest.y + 1 && source.x == dest.x - 1 ||
+                source.y == dest.y - 1 && source.x == dest.x - 1 ||
+                source.y == dest.y - 1 && source.x == dest.x + 1)) {
+            throw new ImpossibleMoveException("Король может ходить только на одну клетку.");
+        }
         return new Cell[] { dest };
     }
 

@@ -2,6 +2,7 @@ package ru.job4j.chess.firuges.black;
 
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.ImpossibleMoveException;
 
 /**
  *
@@ -20,7 +21,27 @@ public class RookBlack extends Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) {
-        return new Cell[] { dest };
+        Cell[] steps;
+        if ((dest.x - source.x) != 0) {
+            steps = new Cell[Math.abs(dest.x - source.x)];
+        } else {
+            steps = new Cell[Math.abs(dest.y - source.y)];
+        }
+        int deltaX =(dest.x - source.x) > 0 ? 1 : -1;
+        int deltaY = (dest.y - source.y) > 0 ? 1 : -1;
+        if (!(source.x == dest.x && source.y != dest.y || source.x != dest.x && source.y == dest.y)) {
+            throw new ImpossibleMoveException("Ладья может ходить только по прямой.");
+        }
+        if (source.x == dest.x) {
+            for (int index = 0; index < steps.length; index++) {
+                steps[index] = Cell.values()[source.y + deltaY * (index + 1)];
+            }
+        } else {
+            for (int index = 0; index < steps.length; index++) {
+                steps[index] = Cell.values()[(source.x + deltaX * (index + 1)) * 8];
+            }
+        }
+        return steps;
     }
 
     @Override
