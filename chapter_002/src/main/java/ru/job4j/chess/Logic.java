@@ -17,30 +17,32 @@ public class Logic {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest) throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
+    public boolean move(Cell source, Cell dest)  {
         boolean rst = false;
         try {
-            int index = this.findBy(source);
-            Cell[] steps = this.figures[index].way(source, dest);
-            this.wayNoValidate(source, steps);
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
+           rst = this.wayNoValidate(source, dest);
         } catch (FigureNotFoundException | ImpossibleMoveException | OccupiedWayException ffe) {
             System.out.println(ffe.getLocalizedMessage());
         }
         return rst;
     }
-    private void wayNoValidate(Cell source, Cell[] steps ) {
-        if (this.findBy(source) == - 1) {
+    private boolean wayNoValidate(Cell source, Cell dest) throws FigureNotFoundException, ImpossibleMoveException, OccupiedWayException {
+        boolean rst = false;
+        int index = this.findBy(source);
+        if (index == -1) {
             throw new FigureNotFoundException("Вы нажали на пустую ячейку.");
         }
+        Cell[] steps = this.figures[index].way(source, dest);
         for (Cell step : steps) {
             if (this.findBy(step) != -1) {
                 throw new OccupiedWayException("Ход закрыт.");
             }
         }
+        if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+            rst = true;
+            this.figures[index] = this.figures[index].copy(dest);
+        }
+        return rst;
     }
 
     public void clean() {

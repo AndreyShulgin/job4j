@@ -32,7 +32,7 @@ public class KingBlack extends Figure {
                 source.y == dest.y - 1 && source.x == dest.x + 1)) {
             throw new ImpossibleMoveException("Король может ходить только на одну клетку.");
         }
-        return new Cell[] { dest };
+        return new Cell[] {dest};
     }
 
     @Override

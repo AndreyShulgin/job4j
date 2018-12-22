@@ -28,7 +28,7 @@ public class PawnBlack extends Figure {
         if (!(source.y == dest.y + 1 && source.x == dest.x)) {
             throw new ImpossibleMoveException("Пешка может ходить только на клетку вперед.");
         }
-            steps = new Cell[] { dest };
+            steps = new Cell[] {dest};
         return steps;
     }
 

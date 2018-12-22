@@ -26,13 +26,21 @@ public class BishopBlack extends Figure {
         Cell[] steps = new Cell[Math.abs(dest.x - source.x)];
         int deltaX = (dest.x - source.x) < 0 ? -1 : 1;
         int deltaY = (dest.y - source.y) < 0 ? -1 : 1;
-        if (Math.abs(dest.x - source.x) != Math.abs(dest.y - source.y)) {
+        if (impossibleMoveBishop(source, dest)) {
             throw new ImpossibleMoveException("Слон может ходить только по диагонали.");
         }
         for (int index = 0; index < steps.length; index++) {
             steps[index] = Cell.values()[(source.x + deltaX * (index + 1)) * 8 + (source.y + deltaY * (index + 1))];
         }
         return steps;
+    }
+
+    public boolean impossibleMoveBishop(Cell source, Cell dest) {
+        boolean rst = false;
+        if (Math.abs(dest.x - source.x) != Math.abs(dest.y - source.y)) {
+            rst = true;
+        }
+        return rst;
     }
 
     public Figure copy(Cell dest) {
