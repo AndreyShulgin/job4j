@@ -12,12 +12,12 @@ public class ConvertList2Array {
         }
         int[][] array = new int[rows][cells];
         int listIndex = 0;
-        for (int rowsIndex = 0; rowsIndex < rows; rowsIndex++) {
+        for (int [] rowsIndex : array) {
             for (int cellsIndex = 0; cellsIndex < cells; cellsIndex++) {
                 if (listIndex < list.size()) {
-                    array[rowsIndex][cellsIndex] = list.get(listIndex++);
+                    rowsIndex[cellsIndex] = list.get(listIndex++);
                 } else {
-                    array[rowsIndex][cellsIndex] = 0;
+                    rowsIndex[cellsIndex] = 0;
                 }
             }
         }
