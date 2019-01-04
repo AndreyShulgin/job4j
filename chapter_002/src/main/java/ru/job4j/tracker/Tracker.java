@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,14 +11,9 @@ import java.util.Random;
  */
 public class Tracker {
     /**
-     * Массив для хранение заявок.
+     * Список для хранение заявок.
      */
-    private final Item[] items = new Item[100];
-
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private List<Item> items = new ArrayList<>();
 
     private static final Random RN = new Random();
 
@@ -27,7 +23,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -48,9 +44,9 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         item.setId(id);
         boolean existence = false;
-        for (int index = 0; index < position; index++) {
-            if (items[index].getId().equals(id)) {
-                items[index] = item;
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                items.set(index, item);
                 existence = true;
                 break;
             }
@@ -64,10 +60,9 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean existence = false;
-        for (int index = 0; index < position; index++) {
-            if (items[index].getId().equals(id)) {
-                System.arraycopy(items, index + 1, items, index, position - index);
-                position--;
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId().equals(id)) {
+                items.remove(index);
                 existence = true;
                 break;
             }
@@ -79,8 +74,8 @@ public class Tracker {
      * Метод копирует все заполненные заявки в другой массив.
      * @return Возвращает копию массива без Null элементов.
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(items, position);
+    public List<Item> findAll() {
+        return this.items;
     }
 
     /**
@@ -88,15 +83,14 @@ public class Tracker {
      * @param key Ключевое имя.
      * @return Возвращает массив с заявками, в котрых имя совдает с ключевым именем.
      */
-    public Item[] findByName(String key) {
-        Item[] names = new Item[position];
-        int namesCount = 0;
-        for (int i = 0; i < position; i++) {
-            if (items[i].getName().equals(key)) {
-                names[namesCount++] = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> names = new ArrayList<>();
+        for (Item item : this.items) {
+            if (item.getName().equals(key)) {
+                names.add(item);
             }
         }
-        return Arrays.copyOf(names, namesCount);
+        return names;
     }
 
     /**

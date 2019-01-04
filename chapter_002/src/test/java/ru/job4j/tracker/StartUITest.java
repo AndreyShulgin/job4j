@@ -28,7 +28,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "name", "desc", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("name"));
+        assertThat(tracker.findAll().get(0).getName(), is("name"));
     }
 
     /**
@@ -40,7 +40,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc"));
         Input inputUpdate = new StubInput(new String[] {"2", item.getId(), "new name", "new desc", "6"});
         new StartUI(inputUpdate, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("new name"));
+        assertThat(tracker.findAll().get(0).getName(), is("new name"));
     }
 
     /**
@@ -53,7 +53,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc"));
         Input inputUpdate = new StubInput(new String[] {"2", "неправильный ID", "new name", "new desc", "6"});
         new StartUI(inputUpdate, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("name"));
+        assertThat(tracker.findAll().get(0).getName(), is("name"));
     }
 
     /**
@@ -66,7 +66,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("name delete", "desc delete"));
         Input input = new StubInput(new String[] {"3", item0.getId(), "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("name delete"));
+        assertThat(tracker.findAll().get(0).getName(), is("name delete"));
     }
     /**
      * Тест метода deleteItem.
@@ -78,7 +78,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(new String[] {"3", "неправильный ID", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll()[0].getName(), is("name"));
+        assertThat(tracker.findAll().get(0).getName(), is("name"));
     }
 
        /**
