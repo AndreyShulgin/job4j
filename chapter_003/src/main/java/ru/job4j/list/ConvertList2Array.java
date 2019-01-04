@@ -16,8 +16,6 @@ public class ConvertList2Array {
             for (int cellsIndex = 0; cellsIndex < cells; cellsIndex++) {
                 if (listIndex < list.size()) {
                     rowsIndex[cellsIndex] = list.get(listIndex++);
-                } else {
-                    rowsIndex[cellsIndex] = 0;
                 }
             }
         }
