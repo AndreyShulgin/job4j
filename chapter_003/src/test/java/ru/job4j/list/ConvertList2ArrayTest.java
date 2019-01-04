@@ -2,7 +2,9 @@ package ru.job4j.list;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -21,6 +23,16 @@ public class ConvertList2ArrayTest {
         ConvertList2Array list = new ConvertList2Array();
         int[][] result = list.toArray(Arrays.asList(1, 2, 3, 4, 5, 6), 2);
         int[][] expect = {{1, 2, 3}, {4, 5, 6}};
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenList2arraysThenListInteger() {
+        ConvertList2Array list = new ConvertList2Array();
+        int[] a = {1, 2};
+        int[] b = {3, 4};
+        List<Integer> result = list.convert(Arrays.asList(a, b));
+        List<Integer> expect = Arrays.asList(1, 2, 3, 4);
         assertThat(result, is(expect));
     }
 }
