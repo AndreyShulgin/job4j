@@ -17,4 +17,14 @@ public class SortUserTest {
         expect.add(user1);
         assertThat(new SortUser().sort(Arrays.asList(user1, user2)), is(expect));
     }
+
+    @Test
+    public void whenSortListThenNameLength() {
+        SortUser sortUser = new SortUser();
+        User user1 = new User("Alex", 25);
+        User user2 = new User("Andrey", 27);
+        List<User> result = Arrays.asList(user1, user2);
+        sortUser.sortNameLength(result);
+        assertThat(result.get(0).getName(), is("Andrey"));
+    }
 }

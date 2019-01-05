@@ -7,4 +7,14 @@ public class SortUser {
     public Set<User> sort (List<User> list) {
         return new TreeSet<>(list);
     }
+
+    public List<User> sortNameLength (List<User> list) {
+        list.sort(new Comparator<User>() {
+            @Override
+            public int compare(User o1, User o2) {
+                return Integer.compare(o2.getName().length(), o1.getName().length());
+            }
+        });
+        return list;
+    }
 }
