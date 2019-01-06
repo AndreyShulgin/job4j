@@ -14,7 +14,7 @@ public class UserConvertTest {
     @Test
     public void whenListUserThenHashMap() {
         UserConvert userConvert = new UserConvert();
-        User user1 = new User("Andrey", 27,"Moscow");
+        User user1 = new User("Andrey", 27, "Moscow");
         User user2 = new User("Alex", 16, "New York");
         HashMap<Integer, User> result = userConvert.process(Arrays.asList(user1, user2));
         HashMap<Integer, User> expect = new HashMap<>();

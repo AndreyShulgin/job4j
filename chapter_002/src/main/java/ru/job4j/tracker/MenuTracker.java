@@ -90,7 +90,7 @@ public class MenuTracker {
 
     private class UpdateItem extends BaseAction {
 
-        public UpdateItem (int key, String name) {
+        public UpdateItem(int key, String name) {
             super(key, name);
         }
 

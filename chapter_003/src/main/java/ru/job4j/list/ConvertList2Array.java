@@ -13,7 +13,7 @@ public class ConvertList2Array {
         }
         int[][] array = new int[rows][cells];
         int listIndex = 0;
-        for (int [] rowsIndex : array) {
+        for (int[] rowsIndex : array) {
             for (int cellsIndex = 0; cellsIndex < cells; cellsIndex++) {
                 if (listIndex < list.size()) {
                     rowsIndex[cellsIndex] = list.get(listIndex++);
@@ -23,7 +23,7 @@ public class ConvertList2Array {
         return array;
     }
 
-    public List<Integer> convert (List<int[]> list) {
+    public List<Integer> convert(List<int[]> list) {
         List<Integer> array = new ArrayList<>();
         for (int[] listIndex : list) {
             for (Integer integer : listIndex) {
