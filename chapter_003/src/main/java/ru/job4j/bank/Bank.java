@@ -40,26 +40,11 @@ public class Bank {
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        boolean result = false;
-        double srcValue = searchValue(srcPassport, srcRequisite);
-        double destValue = searchValue(destPassport, dstRequisite);
-        if (srcValue != -1 && destValue != -1 && srcValue >= amount) {
-            result = true;
-        }
-        return result;
+        List<Account> srcAccount = getUserAccounts(srcPassport);
+        List<Account> dstAccount = getUserAccounts(destPassport);
+        return srcAccount.contains(srcRequisite)
+                && dstAccount.contains(dstRequisite)
+                && srcAccount.get(srcAccount.indexOf(srcRequisite)).getValue() >= amount;
     }
 
-    private double searchValue(String passport, String requisite) {
-        double rst = -1;
-        for (Map.Entry<User, List<Account>> entry : userAccounts.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                for (Account acc : entry.getKey().accountList) {
-                    if (acc.getRequisites().equals(requisite)) {
-                        rst = acc.getValue();
-                    }
-                }
-            }
-        }
-        return rst;
-    }
 }
