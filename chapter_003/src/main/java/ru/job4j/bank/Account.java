@@ -24,9 +24,4 @@ public class Account {
         this.value = value;
         this.requisites = requisites;
     }
-
-    public boolean transferMoney (String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-
-        return true;
-    }
 }
