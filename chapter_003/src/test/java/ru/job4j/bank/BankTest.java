@@ -117,4 +117,34 @@ public class BankTest {
         boolean result = bank.transferMoney("3333", "req1", "2222", "req2", 3);
         assertThat(result, is(false));
     }
+
+    @Test
+    public void whenTransferMoneyValue10ThenValue7() {
+        Bank bank = new Bank();
+        User user1 = new User("Andrey", "1111");
+        Account account1 = new Account(10, "req1");
+        User user2 = new User("Alex", "2222");
+        Account account2 = new Account(5, "req2");
+        bank.addUser(user1);
+        bank.addUser(user2);
+        bank.addAccountToUser("1111", account1);
+        bank.addAccountToUser("2222", account2);
+        bank.transferMoney("1111", "req1", "2222", "req2", 3);
+        assertThat(user1.accountList.get(0).getValue(), is(7.0));
+    }
+
+    @Test
+    public void whenTransferMoneyValue5ThenValue8() {
+        Bank bank = new Bank();
+        User user1 = new User("Andrey", "1111");
+        Account account1 = new Account(10, "req1");
+        User user2 = new User("Alex", "2222");
+        Account account2 = new Account(5, "req2");
+        bank.addUser(user1);
+        bank.addUser(user2);
+        bank.addAccountToUser("1111", account1);
+        bank.addAccountToUser("2222", account2);
+        bank.transferMoney("1111", "req1", "2222", "req2", 3);
+        assertThat(user2.accountList.get(0).getValue(), is(8.0));
+    }
 }

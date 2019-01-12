@@ -40,19 +40,25 @@ public class Bank {
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+        boolean rst = false;
         Account srcAccount = getAcc(srcPassport, srcRequisite);
         Account dstAccount = getAcc(destPassport, dstRequisite);
-        return srcAccount.getValue() != -1 && dstAccount.getValue() !=  -1 && srcAccount.getValue() >= amount;
+        if (srcAccount != null && dstAccount !=  null && srcAccount.getValue() >= amount) {
+            srcAccount.setValue(srcAccount.getValue() - amount);
+            dstAccount.setValue(dstAccount.getValue() + amount);
+            rst = true;
+        }
+        return rst;
     }
 
     public Account getAcc(String pass, String req) {
-        Account account = new Account(-1, "1");
+        Account account = null;
         for (Map.Entry<User, List<Account>> entry : userAccounts.entrySet()) {
             if (entry.getKey().getPassport().equals(pass)) {
                 for (Account acc : entry.getKey().accountList) {
                     if (acc.getRequisites().equals(req)) {
-                        account = entry.getKey().accountList.get
-                                (entry.getKey().accountList.indexOf(acc));
+                        account = entry.getKey().accountList.get(
+                                entry.getKey().accountList.indexOf(acc));
                     }
                 }
             }
