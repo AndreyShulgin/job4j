@@ -57,8 +57,7 @@ public class Bank {
             if (entry.getKey().getPassport().equals(pass)) {
                 for (Account acc : entry.getKey().accountList) {
                     if (acc.getRequisites().equals(req)) {
-                        account = entry.getKey().accountList.get(
-                                entry.getKey().accountList.indexOf(acc));
+                        account = acc;
                     }
                 }
             }
