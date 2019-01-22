@@ -15,7 +15,7 @@ public class Coffee {
         int delivery = value - price;
         int count = 0;
         int[] coins = {10, 5, 2, 1};
-        for (int index = 0; index < coins.length; ) {
+        for (int index = 0; index < coins.length;) {
             if (delivery >= coins[index]) {
                 list.add(count++, coins[index]);
                 delivery -= coins[index];
