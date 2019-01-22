@@ -11,28 +11,21 @@ public class Coffee {
      * @return массив из монет сдачи.
      */
     int[] changes(int value, int price) {
-        List<Integer> coins = new ArrayList<>();
-        int count = 0;
+        List<Integer> list = new ArrayList<>();
         int delivery = value - price;
-        while (delivery >= 10) {
-            coins.add(count++, 10);
-            delivery -= 10;
-        }
-        while (delivery >= 5) {
-            coins.add(count++, 5);
-            delivery -= 5;
-        }
-        while (delivery >= 2) {
-            coins.add(count++, 2);
-            delivery -= 2;
-        }
-        while (delivery >= 1) {
-            coins.add(count++, 1);
-            delivery -= 1;
+        int count = 0;
+        int[] coins = {10, 5, 2, 1};
+        for (int index = 0; index < coins.length; ) {
+            if (delivery >= coins[index]) {
+                list.add(count++, coins[index]);
+                delivery -= coins[index];
+            } else {
+                index++;
+            }
         }
         count = 0;
-        int[] result = new int[coins.size()];
-        for (Integer x : coins) {
+        int[] result = new int[list.size()];
+        for (Integer x : list) {
             result[count++] = x;
         }
         return result;
