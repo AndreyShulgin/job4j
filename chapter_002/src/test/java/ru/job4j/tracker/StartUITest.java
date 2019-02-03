@@ -150,7 +150,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("name", "desc2"));
         Input input = new StubInput(new String[] {"5", "name", "6"});
         new StartUI(output, input, tracker).init();
-        assertThat(new String(out.toByteArray()),
+        assertThat(output.toString(),
                 is("------------ Поиск заявок по имени --------------" + System.lineSeparator()
                         + "desc1" + System.lineSeparator()
                         + "desc2" + System.lineSeparator()
