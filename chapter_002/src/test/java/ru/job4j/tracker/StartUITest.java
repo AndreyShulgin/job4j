@@ -19,7 +19,13 @@ public class StartUITest {
         public void accept(String s) {
             stdout.println(s);
         }
+        @Override
+        public String toString() {
+            return out.toString();
+        }
     };
+
+
     private String ls = System.lineSeparator();
     private String menu = new StringBuilder()
             .append("0. Добавить новую заявку").append(ls)
@@ -125,18 +131,14 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc"));
         Item item1 = tracker.add(new Item("name1", "desc1"));
         Input input = new StubInput(new String[] {"1", "6"});
-        PrintStream stdout = System.out;
-        System.setOut(new PrintStream(out));
         new StartUI(output, input, tracker).init();
-        assertThat(new String(out.toByteArray()),
-                is(menu
-                        + "------------ Список заявок --------------" + System.lineSeparator()
+        assertThat(output.toString(),
+                is("------------ Список заявок --------------" + System.lineSeparator()
                         + "name" + System.lineSeparator()
                         + "desc" + System.lineSeparator()
                         + "name1" + System.lineSeparator()
                         + "desc1" + System.lineSeparator()
-                        + menu));
-        System.setOut(stdout);
+                ));
     }
     /**
      * Тест метода findItemsByName.
@@ -147,15 +149,10 @@ public class StartUITest {
         Item item = tracker.add(new Item("name", "desc1"));
         Item item1 = tracker.add(new Item("name", "desc2"));
         Input input = new StubInput(new String[] {"5", "name", "6"});
-        PrintStream stdout = System.out;
-        System.setOut(new PrintStream(out));
         new StartUI(output, input, tracker).init();
         assertThat(new String(out.toByteArray()),
-                is(menu
-                        + "------------ Поиск заявок по имени --------------" + System.lineSeparator()
+                is("------------ Поиск заявок по имени --------------" + System.lineSeparator()
                         + "desc1" + System.lineSeparator()
                         + "desc2" + System.lineSeparator()
-                        + menu));
-        System.setOut(stdout);
-    }
+                )); }
 }
