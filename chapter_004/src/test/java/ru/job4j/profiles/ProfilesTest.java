@@ -22,11 +22,12 @@ public class ProfilesTest {
     public void whenGetAddressTwoSimilarToList() {
         Profiles profiles = new Profiles();
         List<Profile> profile = new ArrayList<>();
-        profile.add(new Profile(new Address("Moscow", "Arb", 10, 50)));
         profile.add(new Profile(new Address("London", "Arb", 10, 50)));
         profile.add(new Profile(new Address("London", "Arb", 10, 50)));
+        List<Address> expected = new ArrayList<>();
+        expected.add(new Address("London", "Arb", 10, 50));
         List<Address> result = profiles.collect(profile);
-        assertThat(result.get(1).getCity(), is("Moscow"));
+        assertThat(result, is(expected));
     }
 
     @Test
