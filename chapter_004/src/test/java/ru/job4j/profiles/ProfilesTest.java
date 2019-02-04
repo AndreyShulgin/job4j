@@ -17,4 +17,26 @@ public class ProfilesTest {
         List<Address> result = profiles.collect(profile);
         assertThat(result.get(0).getCity(), is("Moscow"));
     }
+
+    @Test
+    public void whenGetAddressTwoSimilarToList() {
+        Profiles profiles = new Profiles();
+        List<Profile> profile = new ArrayList<>();
+        profile.add(new Profile(new Address("Moscow", "Arb", 10, 50)));
+        profile.add(new Profile(new Address("London", "Arb", 10, 50)));
+        profile.add(new Profile(new Address("London", "Arb", 10, 50)));
+        List<Address> result = profiles.collect(profile);
+        assertThat(result.get(1).getCity(), is("Moscow"));
+    }
+
+    @Test
+    public void whenAddListAddressThenCompareToCity() {
+        Profiles profiles = new Profiles();
+        List<Profile> profile = new ArrayList<>();
+        profile.add(new Profile(new Address("Moscow", "Arb", 10, 50)));
+        profile.add(new Profile(new Address("London", "Arb", 10, 50)));
+        profile.add(new Profile(new Address("Berlin", "Arb", 10, 50)));
+        List<Address> result = profiles.collect(profile);
+        assertThat(result.get(0).getCity(), is("Berlin"));
+    }
 }
