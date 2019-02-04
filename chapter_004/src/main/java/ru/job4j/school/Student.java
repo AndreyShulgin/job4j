@@ -1,7 +1,14 @@
 package ru.job4j.school;
 
 public class Student {
-     int score;
+    private int score;
+    private String secondName;
+    public String getSecondName() {
+        return secondName;
+    }
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
 
     public int getScore() {
         return score;
@@ -13,5 +20,9 @@ public class Student {
 
     public Student(int score) {
         this.score = score;
+    }
+    public Student(int score, String secondName) {
+        this.score = score;
+        this.secondName = secondName;
     }
 }

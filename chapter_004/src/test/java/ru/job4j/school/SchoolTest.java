@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -41,5 +43,15 @@ public class SchoolTest {
         students.add(new Student(80));
         List<Student> result = school.collect(students, student -> student.getScore() <= 50);
         assertThat(result.get(0).getScore(), is(40));
+    }
+
+    @Test
+    public void whenListToMap() {
+        School school = new School();
+        List<Student> students = new ArrayList<>();
+        students.add(new Student(10, "Max"));
+        Map<String, Student> result = school.toMap(students);
+        assertThat(result.keySet().contains("Max"), is(true));
+
     }
 }
