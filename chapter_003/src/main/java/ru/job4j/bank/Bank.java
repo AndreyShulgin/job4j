@@ -1,6 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Bank {
     Map<User, List<Account>> userAccounts = new HashMap<>();
@@ -13,30 +14,27 @@ public class Bank {
         userAccounts.remove(user);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void addAccountToUser(String passport, Account account) {
-        for (Map.Entry<User, List<Account>> entry : userAccounts.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                entry.getKey().accountList.add(account);
-            }
-        }
+        userAccounts.entrySet().stream()
+                .filter(userListEntry -> userListEntry.getKey().getPassport().contains(passport))
+                .map(userListEntry -> userListEntry.getValue().add(account))
+                .collect(Collectors.toList());
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void deleteAccountFromUser(String passport, Account account) {
-        for (Map.Entry<User, List<Account>> entry : userAccounts.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                entry.getKey().accountList.remove(account);
-            }
-        }
+        userAccounts.entrySet().stream()
+                .filter(userListEntry -> userListEntry.getKey().getPassport().contains(passport))
+                .map(userListEntry -> userListEntry.getKey().accountList.remove(account))
+                .collect(Collectors.toList());
     }
 
     public List<Account> getUserAccounts(String passport) {
-        List<Account> accounts = new ArrayList<>();
-        for (Map.Entry<User, List<Account>> entry : userAccounts.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                accounts = entry.getKey().accountList;
-            }
-        }
-        return accounts;
+        return userAccounts.entrySet().stream()
+                .filter(userListEntry -> userListEntry.getKey().getPassport().contains(passport))
+                .flatMap(userListEntry -> userListEntry.getValue().stream())
+                .collect(Collectors.toList());
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
@@ -52,17 +50,11 @@ public class Bank {
     }
 
     public Account getAcc(String pass, String req) {
-        Account account = null;
-        for (Map.Entry<User, List<Account>> entry : userAccounts.entrySet()) {
-            if (entry.getKey().getPassport().equals(pass)) {
-                for (Account acc : entry.getKey().accountList) {
-                    if (acc.getRequisites().equals(req)) {
-                        account = acc;
-                    }
-                }
-            }
-        }
-        return account;
+       return userAccounts.entrySet().stream()
+                .filter(userListEntry -> userListEntry.getKey().getPassport().contains(pass))
+                .flatMap(userListEntry -> userListEntry.getKey().accountList.stream())
+                .filter(account -> account.getRequisites().contains(req))
+                .findFirst().orElse(null);
     }
 
 }
