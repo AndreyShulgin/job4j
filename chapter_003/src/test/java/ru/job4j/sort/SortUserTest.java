@@ -10,32 +10,25 @@ public class SortUserTest {
 
     @Test
     public void whenSortListThenTreeSet() {
-        User user1 = new User("Andrey", 27);
-        User user2 = new User("Alex", 25);
-        Set<User> expect = new TreeSet<>();
-        expect.add(user2);
-        expect.add(user1);
-        assertThat(new SortUser().sort(Arrays.asList(user1, user2)), is(expect));
+        List<User> list = List.of(new User("Andrey", 27),
+                new User("Alex", 25));
+        Set<User> expect = Set.of(new User("Andrey", 27),
+                new User("Alex", 25));
+        assertThat(new SortUser().sort(list), is(expect));
     }
 
     @Test
     public void whenSortListThenNameLength() {
-        SortUser sortUser = new SortUser();
-        User user1 = new User("Alex", 25);
-        User user2 = new User("Andrey", 27);
-        List<User> result = Arrays.asList(user1, user2);
-        sortUser.sortNameLength(result);
-        assertThat(result.get(0).getName(), is("Andrey"));
+        List<User> result = new ArrayList<>(List.of(new User("Alex", 25),
+                new User("Andrey", 27)));
+        assertThat(new SortUser().sortNameLength(result).get(0).getName(), is("Andrey"));
     }
 
     @Test
     public void whenSortListThenNameAndAge() {
-        SortUser sortUser = new SortUser();
-        User user1 = new User("Alex", 25);
-        User user2 = new User("Andrey", 27);
-        User user3 = new User("Alex", 10);
-        List<User> result = Arrays.asList(user1, user2, user3);
-        sortUser.sortByAllFields(result);
-        assertThat(result.get(0).getAge(), is(10));
+        List<User> result = new ArrayList<>(List.of(new User("Alex", 25),
+                new User("Andrey", 27),
+                new User("Alex", 10)));
+        assertThat(new SortUser().sortByAllFields(result).get(0).getAge(), is(10));
     }
 }
