@@ -54,4 +54,13 @@ public class SchoolTest {
         assertThat(result.keySet().contains("Max"), is(true));
 
     }
+
+    @Test
+    public void whenStudentScopeUpperBound() {
+        School school = new School();
+        List<Student> students = List.of(new Student(70, "Andrey"),
+                new Student(80, "Alex"));
+        List<Student> rst = school.levelOf(students, 75);
+        assertThat(rst.get(0).getSecondName(), is("Alex"));
+    }
 }

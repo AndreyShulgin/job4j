@@ -4,7 +4,7 @@ import org.junit.Test;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.black.*;
 import ru.job4j.chess.firuges.white.*;
-import sun.rmi.runtime.Log;
+
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
