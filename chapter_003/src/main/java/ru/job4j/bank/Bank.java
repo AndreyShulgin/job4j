@@ -14,20 +14,32 @@ public class Bank {
         userAccounts.remove(user);
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void addAccountToUser(String passport, Account account) {
-        userAccounts.entrySet().stream()
+        final Optional<Map.Entry<User, List<Account>>> first = userAccounts.entrySet().stream()
                 .filter(userListEntry -> userListEntry.getKey().getPassport().contains(passport))
-                .map(userListEntry -> userListEntry.getValue().add(account))
-                .collect(Collectors.toList());
+                .findFirst();
+        if (first.isPresent()) {
+            final User key = first.get().getKey();
+            userAccounts.computeIfPresent(key, (user, accounts) -> {
+                if (!accounts.contains(account)) {
+                    accounts.add(account);
+                }
+                return accounts;
+            });
+        }
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void deleteAccountFromUser(String passport, Account account) {
-        userAccounts.entrySet().stream()
+        final Optional<Map.Entry<User, List<Account>>> first = userAccounts.entrySet().stream()
                 .filter(userListEntry -> userListEntry.getKey().getPassport().contains(passport))
-                .map(userListEntry -> userListEntry.getKey().accountList.remove(account))
-                .collect(Collectors.toList());
+                .findFirst();
+        if (first.isPresent()) {
+            final User key = first.get().getKey();
+            userAccounts.computeIfPresent(key, (user, accounts) -> {
+                accounts.remove(account);
+                return accounts;
+            });
+        }
     }
 
     public List<Account> getUserAccounts(String passport) {
