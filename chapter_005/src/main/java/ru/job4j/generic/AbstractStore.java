@@ -1,4 +1,4 @@
-package ru.job4.generic;
+package ru.job4j.generic;
 
 public abstract class AbstractStore<T extends Base> implements Store<T> {
     private SimpleArray<T> list = new SimpleArray<>(100);

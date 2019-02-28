@@ -1,4 +1,4 @@
-package ru.job4.generic;
+package ru.job4j.generic;
 
 public interface Store<T extends Base> {
 
