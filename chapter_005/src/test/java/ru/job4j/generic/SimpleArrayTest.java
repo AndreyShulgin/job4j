@@ -2,6 +2,8 @@ package ru.job4j.generic;
 
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -41,8 +43,7 @@ public class SimpleArrayTest {
 
     @Test
     public void hasNext() {
-        SimpleArray<String> list = new SimpleArray<>(3);
-
+        SimpleArray<String> list = new SimpleArray<>(4);
         list.add("name");
         list.add("City");
         list.add("Address");

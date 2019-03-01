@@ -22,12 +22,15 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void set(int position, T model) {
-        objects[position] = model;
+        if (position <= index) {
+            objects[position] = model;
+        }
     }
 
     public void remove(int position) {
         if (objects.length - 1 - position >= 0) {
             System.arraycopy(objects, position + 1, objects, position, objects.length - 1 - position);
+            index--;
         }
     }
 
@@ -36,7 +39,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return indexIterator < objects.length;
+                return indexIterator < objects.length && objects[indexIterator] != null;
             }
 
             @Override
