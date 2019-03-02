@@ -1,21 +1,23 @@
 package ru.job4j.generic;
 
-public abstract class AbstractStore<T extends Base> implements Store<T> {
+public abstract class AbstractStore<T extends Base> {
     private SimpleArray<T> list = new SimpleArray<>(100);
 
-    @Override
+
     public void add(T model) {
         list.add(model);
     }
 
     public boolean replace(String id, T model) {
         boolean result = false;
+        int index = 0;
         for (T t : list) {
             if (t.getId().contains(id)) {
-                t = model;
+                list.set(index, model);
                 result = true;
                 break;
             }
+            index++;
         }
         return result;
     }
@@ -37,7 +39,7 @@ public abstract class AbstractStore<T extends Base> implements Store<T> {
     public T findById(String id) {
         T result = null;
         for (T t : list) {
-            if (t != null && t.getId().contains(id)) {
+            if (t.getId().contains(id)) {
                 result = t;
                 break;
             }

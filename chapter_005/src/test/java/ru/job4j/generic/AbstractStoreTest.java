@@ -38,21 +38,19 @@ public class AbstractStoreTest {
         RoleStore roleStore = new RoleStore();
 
         roleStore.add(role);
-        boolean result = roleStore.replace("111", role1);
+        roleStore.replace("111", role1);
 
-        assertThat(result, is(true));
+        assertThat(roleStore.findById("222"), is(role1));
     }
 
     @Test
     public void whenFindRoleById() {
         Role role = new Role("111");
-        Role role1 = new Role("222");
         RoleStore roleStore = new RoleStore();
 
         roleStore.add(role);
-        Role rst = roleStore.findById("111");
 
-        assertThat(rst, is(role));
+        assertThat(roleStore.findById("111"), is(role));
     }
 
     @Test
@@ -63,9 +61,8 @@ public class AbstractStoreTest {
 
         roleStore.add(role);
         roleStore.add(role1);
-        Role rst = roleStore.findById("333");
 
-        assertNull(rst);
+        assertNull(roleStore.findById("333"));
     }
 
     @Test
@@ -76,7 +73,7 @@ public class AbstractStoreTest {
 
         userStore.add(user);
         userStore.add(user1);
-        boolean rst = userStore.delete("111");
-        assertThat(rst, is(true));
+
+        assertThat(userStore.delete("111"), is(true));
     }
 }
