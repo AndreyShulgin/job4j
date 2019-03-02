@@ -25,7 +25,7 @@ public class SimpleArray<T> implements Iterable<T> {
         if (position <= index) {
             objects[position] = model;
         }
-    }
+     }
 
     public void remove(int position) {
         if (objects.length - 1 - position >= 0) {
@@ -39,7 +39,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
             @Override
             public boolean hasNext() {
-                return indexIterator < objects.length && objects[indexIterator] != null;
+                return indexIterator < index;
             }
 
             @Override
