@@ -2,6 +2,7 @@ package ru.job4j.generic;
 
 import org.junit.Test;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.core.Is.is;
@@ -44,17 +45,18 @@ public class SimpleArrayTest {
     @Test
     public void hasNext() {
         SimpleArray<String> list = new SimpleArray<>(4);
+        Iterator<String> it = list.iterator();
         list.add("name");
         list.add("City");
         list.add("Address");
-        assertThat(list.iterator().hasNext(), is(true));
-        assertThat(list.iterator().hasNext(), is(true));
-        assertThat(list.iterator().hasNext(), is(true));
-        assertThat(list.iterator().next(), is("name"));
-        assertThat(list.iterator().hasNext(), is(true));
-        assertThat(list.iterator().next(), is("City"));
-        assertThat(list.iterator().next(), is("Address"));
-        assertThat(list.iterator().hasNext(), is(false));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("name"));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is("City"));
+        assertThat(it.next(), is("Address"));
+        assertThat(it.hasNext(), is(false));
 
     }
 

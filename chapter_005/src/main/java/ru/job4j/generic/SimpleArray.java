@@ -45,6 +45,7 @@ public class SimpleArray<T> implements Iterable<T> {
             @Override
             public T next() {
                 if (!hasNext()) {
+                    indexIterator = 0;
                     throw new NoSuchElementException("Конец массива");
                 }
                 return (T) objects[indexIterator++];
