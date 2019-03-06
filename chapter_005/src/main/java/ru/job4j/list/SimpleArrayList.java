@@ -21,10 +21,11 @@ public class SimpleArrayList<E> {
     /**
      * Реализовать метод удаления первого элемент в списке.
      */
-    public void delete() {
+    public E delete() {
         Node<E> result = this.first;
         this.first = result.next;
         this.size--;
+        return result.date;
     }
 
     /**
