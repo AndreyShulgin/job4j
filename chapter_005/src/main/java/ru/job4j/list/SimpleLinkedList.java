@@ -9,7 +9,12 @@ import java.util.NoSuchElementException;
  * Класс SimpleLinkedList.
  */
 public class SimpleLinkedList<E> implements Iterable<E> {
+
     private int size = 0;
+
+    public int getSize() {
+        return size;
+    }
 
     public Node<E> getFirst() {
         return first;
@@ -46,6 +51,12 @@ public class SimpleLinkedList<E> implements Iterable<E> {
         for (int i = 0; i < index; i++) {
             result = result.next;
         }
+        return result.date;
+    }
+
+    public E removeFirst() {
+        Node<E> result = this.first;
+        this.first = this.first.next;
         return result.date;
     }
 

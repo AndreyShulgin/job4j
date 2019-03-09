@@ -21,9 +21,7 @@ public class SimpleStack<T> {
      * @return - удаленное значение.
      */
     public T poll() {
-        SimpleLinkedList.Node<T> result = list.getFirst();
-        list.setFirst(list.getFirst().next);
-        return result.date;
+        return list.removeFirst();
     }
 
 
