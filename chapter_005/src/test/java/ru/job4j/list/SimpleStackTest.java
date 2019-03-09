@@ -23,12 +23,12 @@ public class SimpleStackTest {
     @Test
     public void whenDeleteElementThenGetZeroReturnCity() {
         assertThat(stack.poll(), is("country"));
-        assertThat(stack.get(0), is("city"));
+        assertThat(stack.getList().get(0), is("city"));
     }
 
     @Test
     public void whenIterateStack() {
-        Iterator<String> it = stack.iterator();
+        Iterator<String> it = stack.getList().iterator();
         assertThat(it.next(), is("country"));
         assertThat(it.hasNext(), is(true));
         it.next();
@@ -38,7 +38,7 @@ public class SimpleStackTest {
 
     @Test(expected = ConcurrentModificationException.class)
     public void whenChangeStackThenIteratorException() {
-        Iterator<String> it = stack.iterator();
+        Iterator<String> it = stack.getList().iterator();
         assertThat(it.next(), is("country"));
         stack.push("hello");
         it.next();

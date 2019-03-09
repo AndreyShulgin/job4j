@@ -3,7 +3,17 @@ package ru.job4j.list;
 /**
  * Класс SimpleStack.
  */
-public class SimpleStack<T> extends SimpleLinkedList<T> {
+public class SimpleStack<T> {
+
+    private SimpleLinkedList<T> list = new SimpleLinkedList<>();
+
+    public SimpleLinkedList<T> getList() {
+        return list;
+    }
+
+    public void setList(SimpleLinkedList<T> list) {
+        this.list = list;
+    }
 
     /**
      * Метод удаляет значение и возвращает его.
@@ -11,8 +21,8 @@ public class SimpleStack<T> extends SimpleLinkedList<T> {
      * @return - удаленное значение.
      */
     public T poll() {
-        Node<T> result = this.getFirst();
-        this.setFirst(this.getFirst().next);
+        SimpleLinkedList.Node<T> result = list.getFirst();
+        list.setFirst(list.getFirst().next);
         return result.date;
     }
 
@@ -23,6 +33,6 @@ public class SimpleStack<T> extends SimpleLinkedList<T> {
      * @param value - значение.
      */
     public void push(T value) {
-        this.add(value);
+        list.add(value);
     }
 }
