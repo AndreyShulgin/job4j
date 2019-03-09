@@ -10,6 +10,15 @@ import java.util.NoSuchElementException;
  */
 public class SimpleLinkedList<E> implements Iterable<E> {
     private int size = 0;
+
+    public Node<E> getFirst() {
+        return first;
+    }
+
+    public void setFirst(Node<E> first) {
+        this.first = first;
+    }
+
     private Node<E> first;
     private int modCount;
 
