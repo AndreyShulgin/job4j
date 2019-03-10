@@ -12,20 +12,16 @@ public class SimpleLinkedList<E> implements Iterable<E> {
 
     private int size = 0;
 
+    private Node<E> first;
+    private int modCount;
+
     public int getSize() {
         return size;
     }
 
-    public Node<E> getFirst() {
-        return first;
+    public void setSize(int size) {
+        this.size = size;
     }
-
-    public void setFirst(Node<E> first) {
-        this.first = first;
-    }
-
-    private Node<E> first;
-    private int modCount;
 
     /**
      * Метод добавляет данные value  в начало списка.
@@ -54,9 +50,16 @@ public class SimpleLinkedList<E> implements Iterable<E> {
         return result.date;
     }
 
+    /**
+     * Метод удаляет последний внесенный элемент из списка.
+     *
+     * @return возвращает удаленный элемент.
+     */
     public E removeFirst() {
         Node<E> result = this.first;
         this.first = this.first.next;
+        size--;
+        modCount++;
         return result.date;
     }
 
