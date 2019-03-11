@@ -5,7 +5,7 @@ package ru.job4j.list;
  */
 public class Node<T> {
     private T value;
-     Node<T> next;
+    Node<T> next;
 
     public Node(T value) {
         this.value = value;
@@ -13,6 +13,7 @@ public class Node<T> {
 
     /**
      * Метод проверяет цилличность связанного списка.
+     *
      * @return возврящает True если связанный списокявляется циклическим.
      */
     public boolean hasCycle(Node first) {
