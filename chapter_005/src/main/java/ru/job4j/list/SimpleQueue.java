@@ -1,15 +1,12 @@
 package ru.job4j.list;
 
+
 /**
  * Класс SimpleQueue.
  */
 public class SimpleQueue<T> {
-    private SimpleStack<T> stack = new SimpleStack<>();
-    private SimpleStack<T> newStack = new SimpleStack<>();
-
-    public SimpleStack<T> getStack() {
-        return stack;
-    }
+    private SimpleStack<T> in = new SimpleStack<>();
+    private SimpleStack<T> out = new SimpleStack<>();
 
     /**
      * Метод удаляет первый внесенный элемент из списка.
@@ -17,17 +14,13 @@ public class SimpleQueue<T> {
      * @return возвращает удаленный элемент.
      */
     public T poll() {
-        T result;
-        int size = stack.getList().getSize();
-        for (T element : stack.getList()) {
-            newStack.getList().add(element);
+        if (!out.getList().iterator().hasNext()) {
+            for (T t : in.getList()) {
+                out.push(t);
+            }
+            in = null;
         }
-        result = newStack.getList().removeFirst();
-        for (T element : newStack.getList()) {
-            stack.getList().add(element);
-        }
-        stack.getList().setSize(--size);
-        return result;
+        return out.poll();
     }
 
     /**
@@ -36,7 +29,7 @@ public class SimpleQueue<T> {
      * @param value - значение.
      */
     public void push(T value) {
-        stack.getList().add(value);
+        in.getList().add(value);
     }
 }
 

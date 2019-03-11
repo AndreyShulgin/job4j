@@ -15,14 +15,6 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     private Node<E> first;
     private int modCount;
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
     /**
      * Метод добавляет данные value  в начало списка.
      *
