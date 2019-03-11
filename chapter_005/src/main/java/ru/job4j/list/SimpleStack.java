@@ -4,16 +4,7 @@ package ru.job4j.list;
  * Класс SimpleStack.
  */
 public class SimpleStack<T> {
-
     private SimpleLinkedList<T> list = new SimpleLinkedList<>();
-
-    public SimpleLinkedList<T> getList() {
-        return list;
-    }
-
-    public void setList(SimpleLinkedList<T> list) {
-        this.list = list;
-    }
 
     /**
      * Метод удаляет значение и возвращает его.
@@ -24,7 +15,6 @@ public class SimpleStack<T> {
         return list.removeFirst();
     }
 
-
     /**
      * Метод помещает зачение в коллекцию.
      *
@@ -32,5 +22,12 @@ public class SimpleStack<T> {
      */
     public void push(T value) {
         list.add(value);
+    }
+
+    /** Метод проверяет наличие элементов в коллекции.
+     * @return возвращет true или false.
+     */
+    public boolean isEmpty() {
+        return list.getSize() == 0;
     }
 }

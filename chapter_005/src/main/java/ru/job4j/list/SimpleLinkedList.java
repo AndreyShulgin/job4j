@@ -9,11 +9,13 @@ import java.util.NoSuchElementException;
  * Класс SimpleLinkedList.
  */
 public class SimpleLinkedList<E> implements Iterable<E> {
-
     private int size = 0;
-
     private Node<E> first;
     private int modCount;
+
+    public int getSize() {
+        return size;
+    }
 
     /**
      * Метод добавляет данные value  в начало списка.

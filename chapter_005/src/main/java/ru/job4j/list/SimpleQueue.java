@@ -14,11 +14,8 @@ public class SimpleQueue<T> {
      * @return возвращает удаленный элемент.
      */
     public T poll() {
-        if (!out.getList().iterator().hasNext()) {
-            for (T t : in.getList()) {
-                out.push(t);
-            }
-            in = null;
+        while (!in.isEmpty()) {
+            out.push(in.poll());
         }
         return out.poll();
     }
@@ -29,7 +26,8 @@ public class SimpleQueue<T> {
      * @param value - значение.
      */
     public void push(T value) {
-        in.getList().add(value);
+        in.push(value);
     }
+
 }
 

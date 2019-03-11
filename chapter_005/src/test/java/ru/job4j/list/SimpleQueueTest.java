@@ -8,22 +8,22 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class SimpleQueueTest {
-    private SimpleQueue<String> queue;
+    private SimpleQueue<Integer> queue;
 
     @Before
     public void createQueue() {
         queue = new SimpleQueue<>();
-        queue.push("Name");
-        queue.push("Address");
-        queue.push("City");
+        queue.push(1);
+        queue.push(2);
+        queue.push(3);
     }
 
     @Test
     public void poll() {
-        assertThat(queue.poll(), is("Name"));
-        assertThat(queue.poll(), is("Address"));
-        assertThat(queue.poll(), is("City"));
+        assertThat(queue.poll(), is(1));
+        assertThat(queue.poll(), is(2));
+        queue.push(4);
+        assertThat(queue.poll(), is(4));
+        assertThat(queue.poll(), is(3));
     }
-
-
 }
