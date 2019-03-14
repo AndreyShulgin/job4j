@@ -8,28 +8,28 @@ import java.util.Iterator;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class ContainerTest {
+public class SimpleListTest {
 
     @Test
     public void whenCreateArrayStringType() {
-        Container<String> container = new Container<>(2);
+        SimpleList<String> simpleList = new SimpleList<>(2);
 
-        container.add("Hello");
+        simpleList.add("Hello");
 
-        assertThat(container.get(0), is("Hello"));
+        assertThat(simpleList.get(0), is("Hello"));
     }
 
     @Test (expected = ConcurrentModificationException.class)
     public void whenChangeArrayLengthThenCME() {
-        Container<String> container = new Container<>(2);
-        Iterator it = container.iterator();
+        SimpleList<String> simpleList = new SimpleList<>(2);
+        Iterator it = simpleList.iterator();
 
-        container.add("Hello");
-        container.add("Hi");
+        simpleList.add("Hello");
+        simpleList.add("Hi");
 
         assertThat(it.hasNext(), is(true));
 
-        container.add("new Size");
+        simpleList.add("new Size");
         it.next();
     }
 

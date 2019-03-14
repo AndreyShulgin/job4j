@@ -4,33 +4,33 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Container<E> implements Iterable<E> {
-    private Object[] container;
+public class SimpleList<E> implements Iterable<E> {
+    private Object[] list;
     private int index;
     private int modCount;
 
-    public Container(int size) {
-        this.container = new Object[size];
+    public SimpleList(int size) {
+        this.list = new Object[size];
     }
 
     public void add(E value) {
-        Object[] newContainer;
-        if (index == container.length) {
-            newContainer = new Object[container.length * 2];
-            System.arraycopy(container, 0, newContainer, 0, container.length);
-            container = newContainer;
+        Object[] newList;
+        if (index == list.length) {
+            newList = new Object[list.length * 2];
+            System.arraycopy(list, 0, newList, 0, list.length);
+            list = newList;
             modCount++;
         }
-        container[index++] = value;
+        list[index++] = value;
     }
 
     public E get(int position) {
-        return (E) this.container[position];
+        return (E) this.list[position];
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
+        return new Iterator<>() {
             private int indexIterator = 0;
             private int expectedModCount = modCount;
 
@@ -47,7 +47,7 @@ public class Container<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException("Конец массива.");
                 }
-                return (E) container[indexIterator++];
+                return (E) list[indexIterator++];
             }
         };
     }
