@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MapTest {
 
@@ -17,6 +18,11 @@ public class MapTest {
             this.name = name;
             this.children = children;
             this.birthday = birthday;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, children, birthday);
         }
     }
 
