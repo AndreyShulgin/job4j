@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+
 public class Config {
     private final String path;
     private final Map<String, String> values = new HashMap<>();
@@ -14,25 +15,20 @@ public class Config {
         this.path = path;
     }
 
+    /**
+     * Метод добавляет данные в Map.
+     * Если в строке есть символ "=", то ключем будет часть строки до знака, а значением, часть строки после знака.
+     */
     public void load() {
         try (BufferedReader reader = new BufferedReader(new FileReader(this.path))) {
             String line = reader.readLine();
-            char[] array;
             while (line != null) {
                 if (line.contains("##")) {
                     line = reader.readLine();
                 } else {
-                    array = line.toCharArray();
-                    char[] key;
-                    char[] value;
-                    for (int index = 0; index != array.length; index++) {
-                        if (array[index] == '=') {
-                            key = new char[index + 1];
-                            value = new char[array.length - index - 1];
-                            System.arraycopy(array, 0, key, 0, index);
-                            System.arraycopy(array, index + 1, value, 0, array.length - index - 1);
-                            values.put(new String(key), new String(value));
-                        }
+                    int number = line.indexOf("=");
+                    if (number > 0) {
+                        values.put(line.substring(0, number), line.substring(number + 1));
                     }
                     line = reader.readLine();
                 }
@@ -43,6 +39,12 @@ public class Config {
     }
 
 
+    /**
+     * Метод поиска значения по ключу.
+     *
+     * @param key - ключ
+     * @return если ключ есть в Map, то возвращает значение, если нет, возвращает null.
+     */
     public String value(String key) {
         String result = null;
         for (Map.Entry<String, String> x : values.entrySet()) {
@@ -65,10 +67,9 @@ public class Config {
         return out.toString();
     }
 
-/*    public static void main(String[] args) {
-        //      System.out.println(new Config("app.properties"));
+    public static void main(String[] args) {
         Config c = new Config("app.properties");
         c.load();
         System.out.println(c.value("hibernate.dialect"));
-    }*/
+    }
 }
